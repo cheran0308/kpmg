@@ -23,3 +23,11 @@ This web application uses:
 * Python 3.6
 * Django
 * Mysql as a Database (mysqlclient)
+
+## To Create a login user
+
+* Open Terminal and navigate to your project root
+* Run **python manage.py shell**
+* Run **from app.models import User**
+* Run **user=User(name="test", email="test@test.com", password="123456", phone="987654321", dob="01-01-1990")**
+* Run **user.save()**
