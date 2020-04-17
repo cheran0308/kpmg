@@ -1,0 +1,4 @@
+env/*
+.vscode/*
+portal/app/__pycache__/*
+portal/app/migrations/*

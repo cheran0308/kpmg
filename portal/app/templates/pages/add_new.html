@@ -1,0 +1,36 @@
+{% extends 'index.html' %}
+{% block content %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Add New Employee/ Employees</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-success card-header-icon">
+                    Upload excel sheet with Employee details 
+                </div>
+                <div class="card-body">
+                    <form action="/add_new/" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="custom-file mb-3">
+                            <input type="file" class="custom-file-input" id="excelFile" name="excel_file">
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                        <div class="float-right">
+                            <button type="submit" class="btn btn-outline-primary" id="fileUploadBtn">Upload</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% if total != '' %}
+                <p class="pd-1-0">Found {{count}} out of {{total}} invalid entries. Click <a href="/unsuccessful">here</a> to check the invalid entry or <a href="/successful">here</a> to check the valid entry.
+            {% endif %} 
+        </div>
+    </div>
+
+</div>
+{% endblock %}
