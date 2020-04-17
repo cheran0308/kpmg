@@ -19,7 +19,6 @@ This webapp is a Python 3.6 application.
 ## Tech Stack
 This web application uses:
 
-* Ubuntu 18.04 LTS (OS)
 * Python 3.6
 * Django
 * Mysql as a Database (mysqlclient)
