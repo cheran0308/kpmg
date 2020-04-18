@@ -22,6 +22,7 @@ This web application uses:
 * Python 3.6
 * Django
 * Mysql as a Database (mysqlclient)
+* Redis
 
 ## To Create a login user
 
@@ -30,3 +31,12 @@ This web application uses:
 * Run **from app.models import User**
 * Run **user=User(name="test", email="test@test.com", password="123456", phone="987654321", dob="01-01-1990")**
 * Run **user.save()**
+
+## Installing Redis Cache
+
+* Run Command **wget http://download.redis.io/redis-stable.tar.gz**
+* Run **tar xvzf redis-stable.tar.gz**
+* Run **cd redis-stable**
+* Run **make**
+* Run **make test**
+* Run **sudo make install**
