@@ -2,3 +2,4 @@ env/*
 .vscode/*
 portal/app/__pycache__/*
 portal/app/migrations/*
+portal/portal/__pycache__/*

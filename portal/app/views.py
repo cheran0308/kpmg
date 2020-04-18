@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
+from django.core.cache import cache
 from .models import User, Workflow, WFLog
 import re
 from datetime import datetime
@@ -35,8 +36,10 @@ def add_new(request):
             desc = request.POST.get("desc")
             approver = request.POST.get("approver")
 
-            created_by = User.objects.get(name=request.session['user'])
-            approved_by = User.objects.get(name=approver)
+            # created_by = User.objects.get(name=request.session['user'])
+            created_by = cache.get_or_set(request.session['user'], User.objects.get(name=request.session['user']))
+            approved_by = cache.get_or_set(approver, User.objects.get(name=approver))
+            # approved_by = User.objects.get(name=approver)
             workflow = Workflow(name=name, description=desc, created_by=created_by, approver=approved_by)
             workflow.save()
 
@@ -48,7 +51,8 @@ def add_new(request):
             return JsonResponse([{"success": False}], safe=False)
 
 def valid_data(request):
-    approver = User.objects.get(name=request.session['user'])
+    approver = cache.get_or_set(request.session['user'], User.objects.get(name=request.session['user']))
+    # approver = User.objects.get(name=request.session['user'])
     datas = Workflow.objects.filter(approver=approver, status__in=["created", "modified", "rejected", "approved"]).values('id','name', 'description', 'status', 'date', 'created_by')
     data_list = []
     if datas:
@@ -59,7 +63,8 @@ def valid_data(request):
     return render(request, 'pages/valid_data.html', {"title" : "Valid Data", "data_list": data_list, "user":request.session['user']})
 
 def invalid_data(request):
-    creator = User.objects.get(name=request.session['user'])
+    creator = cache.get_or_set(request.session['user'], User.objects.get(name=request.session['user']))
+    # creator = User.objects.get(name=request.session['user'])
     datas = Workflow.objects.filter(created_by=creator).values('id', 'name', 'description', 'status', 'date')
     data_list = []
     if datas:
