@@ -43,3 +43,32 @@ This web application uses:
 * Run **make**
 * Run **make test**
 * Run **sudo make install**
+
+## Setting up Load Balancer (NGINX)
+The Below method shows setting up NGINX in Ubuntu 10.04 LTS
+
+* Run Command **sudo apt-get update**
+* Run **sudo apt-get install nginx**
+* Verify the Installation by going to http://localhost
+* Open /etc/nginx/sites-available/default using **sudo nano /etc/nginx/sites-available/default**
+* Adding the below code in it
+
+```
+upstream www {
+  server localhost:8000;
+  server localhost:9000;
+  server localhost:8001;
+}
+server {
+  listen 80 default_server;
+  listen [::]:80 default_server;
+  
+  location / {
+    proxy_pass http://www;
+  }
+}
+```
+* save it, `ctrl+x` and type `y` and **enter**
+* Restart the server using **sudo service nginx restart**
+* Run the django servers in ports 8000, 9000 and 9001 
+* Verify by going to http:localhost
