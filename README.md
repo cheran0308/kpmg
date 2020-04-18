@@ -16,6 +16,9 @@ This webapp is a Python 3.6 application.
 10. Run **python manage.py migrate** and then **python manage.py runserver** to run the web application.
 11. Go to localhost:8000 in your browser.
 
+## System Design
+![system Design](https://github.com/cheran0308/kpmg/blob/master/screenshots/system_design.jpg)
+
 ## Tech Stack
 This web application uses:
 
